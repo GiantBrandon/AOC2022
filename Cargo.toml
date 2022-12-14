@@ -1,0 +1,13 @@
+[package]
+name = "AOC2022"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+gloo = "0.8"
+js-sys = "0.3"
+yew = { git = "https://github.com/yewstack/yew/", features = ["csr"] }
+wasm-bindgen = "0.2"
+web-sys = { version = "0.3.56", features = ["HtmlInputElement"] }
