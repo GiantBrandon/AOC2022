@@ -5,6 +5,7 @@ mod components;
 
 use components::day_one::DayOne;
 use components::day_two::DayTwo;
+use components::day_three::DayThree;
 
 // Define the possible messages which can be sent to the component
 pub enum Msg {
@@ -51,6 +52,7 @@ impl Component for App {
 
                 if self.value == 1 { <DayOne /> }
                 if self.value == 2 { <DayTwo /> }
+                if self.value == 3 { <DayThree /> }
             </div>
         }
     }
