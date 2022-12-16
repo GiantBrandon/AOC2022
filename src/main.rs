@@ -4,6 +4,7 @@ use yew::prelude::*;
 mod components;
 
 use components::day_one::DayOne;
+use components::day_two::DayTwo;
 
 // Define the possible messages which can be sent to the component
 pub enum Msg {
@@ -48,8 +49,8 @@ impl Component for App {
                     }
                 </div>
 
-                // if self.value == 1 { <day1 /> }
-                <DayOne />
+                if self.value == 1 { <DayOne /> }
+                if self.value == 2 { <DayTwo /> }
             </div>
         }
     }
