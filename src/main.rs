@@ -1,5 +1,6 @@
 use components::day_five::solve5;
 use components::day_four::solve4;
+use components::day_six::solve6;
 use components::day_three::solve3;
 use components::day_two::solve2;
 use components::day_one::solve1;
@@ -43,6 +44,7 @@ impl Component for App {
                     3 => { solve3(text) }
                     4 => { solve4(text) }
                     5 => { solve5(text) }
+                    6 => { solve6(text) }
                     _ => { ("-".to_owned(), "-".to_owned()) }
                 };
                 self.part1 = result1;

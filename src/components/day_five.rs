@@ -38,8 +38,6 @@ fn handle2(line: &str, stack: &mut Vec<Vec<char>>) -> Vec<Vec<char>> {
 
 pub fn solve5(input: String) -> (String, String) {
     let mut instrument_flag = false;
-    let mut count_1: i32 = 0;
-    let mut count_2: i32 = 0;
 
     let mut stack1: Vec<Vec<char>> = vec![Vec::new(); 9];
     let mut stack2: Vec<Vec<char>> = vec![Vec::new(); 9];
