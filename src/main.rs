@@ -1,19 +1,24 @@
-use gloo::console;
+use components::day_five::solve5;
+use components::day_four::solve4;
+use components::day_three::solve3;
+use components::day_two::solve2;
+use components::day_one::solve1;
+use web_sys::HtmlInputElement;
 use yew::prelude::*;
+use wasm_bindgen::JsCast;
 
 mod components;
 
-use components::day_one::DayOne;
-use components::day_two::DayTwo;
-use components::day_three::DayThree;
-
 // Define the possible messages which can be sent to the component
 pub enum Msg {
-    SetValue(i64),
+    SetDay(i32),
+    UpdateInput(Event)
 }
 
 pub struct App {
-    value: i64,
+    day: i32,
+    part1: String,
+    part2: String,
 }
 
 impl Component for App {
@@ -21,13 +26,27 @@ impl Component for App {
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
-        Self { value: 0 }
+        Self { day: 0, part1: "-".to_owned(), part2: "-".to_owned() }
     }
 
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
-            Msg::SetValue(new_value) => {
-                self.value = new_value;
+            Msg::SetDay(new_value) => {
+                self.day = new_value;
+                true
+            }
+            Msg::UpdateInput(event) => {
+                let text = event.target().unwrap().unchecked_into::<HtmlInputElement>().value();
+                let (result1, result2) = match self.day {
+                    1 => { solve1(text) }
+                    2 => { solve2(text) }
+                    3 => { solve3(text) }
+                    4 => { solve4(text) }
+                    5 => { solve5(text) }
+                    _ => { ("-".to_owned(), "-".to_owned()) }
+                };
+                self.part1 = result1;
+                self.part2 = result2;
                 true
             }
         }
@@ -35,24 +54,25 @@ impl Component for App {
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         let indices = 1..26;
-        console::log!(self.value == 1);
         html! {
             <div>
                 <div class="panel">
                     { 
                         indices.into_iter().map(|index| {
                             html!{
-                                <button key={index} onclick={ctx.link().callback(move |_| Msg::SetValue(index))}>
-                                    { index }
+                                <button key={index} onclick={ctx.link().callback(move |_| Msg::SetDay(index))}>
+                                    { index }{ if self.day == index { "*" } else { "" } }
                                 </button>
                             }
                         }).collect::<Html>()
                     }
                 </div>
 
-                if self.value == 1 { <DayOne /> }
-                if self.value == 2 { <DayTwo /> }
-                if self.value == 3 { <DayThree /> }
+                <div>
+                    <textarea style={"width: 400px; height: 400px"} onchange={ctx.link().callback(move |event: Event| Msg::UpdateInput(event))} />
+                    <p>{ "Part One:"} { self.part1.clone() }</p>
+                    <p>{ "Part Two:"} { self.part2.clone() }</p>
+                </div>
             </div>
         }
     }
