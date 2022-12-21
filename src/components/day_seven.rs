@@ -6,7 +6,7 @@ fn parse(input: &str) -> Vec<i32> {
             ["$", "cd", ".."] => {
                 directories.push(current_dir.pop().unwrap());
             },
-            ["$", "cd", s] => {
+            ["$", "cd", _] => {
                 current_dir.push(0);
             }
             ["dir", _] => {
