@@ -1,7 +1,5 @@
 use std::collections::HashSet;
 
-use gloo::console::log;
-
 fn resolve_rope(mut rope: Vec<(i32, i32)>, head: (i32, i32)) -> Vec<(i32, i32)> {
     for index in 0..rope.len() {
         if index == 0{
@@ -76,7 +74,6 @@ fn solve(input: String, size: usize) -> i32 {
     return coordinates.len() as i32
 }
 
-//2482
 pub fn solve9(input: String) -> (String, String) {
     return (solve(input.clone(), 2).to_string(), solve(input.clone(), 10).to_string())
 }

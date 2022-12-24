@@ -4,6 +4,7 @@ use components::day_four::solve4;
 use components::day_nine::solve9;
 use components::day_seven::solve7;
 use components::day_six::solve6;
+use components::day_ten::solve10;
 use components::day_three::solve3;
 use components::day_two::solve2;
 use components::day_one::solve1;
@@ -30,7 +31,7 @@ impl Component for App {
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
-        Self { day: 0, part1: "-".to_owned(), part2: "-".to_owned() }
+        Self { day: 10, part1: "-".to_owned(), part2: "-".to_owned() }
     }
 
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
@@ -51,6 +52,7 @@ impl Component for App {
                     7 => { solve7(text) }
                     8 => { solve8(text) }
                     9 => { solve9(text) }
+                    10 => { solve10(text) }
                     _ => { ("-".to_owned(), "-".to_owned()) }
                 };
                 self.part1 = result1;
@@ -78,8 +80,8 @@ impl Component for App {
 
                 <div>
                     <textarea style={"width: 400px; height: 400px"} onchange={ctx.link().callback(move |event: Event| Msg::UpdateInput(event))} />
-                    <p>{ "Part One:"} { self.part1.clone() }</p>
-                    <p>{ "Part Two:"} { self.part2.clone() }</p>
+                    <p style={"white-space: pre-line"}>{ "Part One:"} { self.part1.clone() }</p>
+                    <p style={"white-space: pre-line"}>{ "Part Two:"} { self.part2.clone() }</p>
                 </div>
             </div>
         }
